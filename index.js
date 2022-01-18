@@ -1,6 +1,4 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const app = express()
 const port = 3000
 const {getDb,saveDb,setLogs,sqlTest} = require("./db")
@@ -31,7 +29,7 @@ app.all("*",(req,res,next)=>{
 
 // express 有自带的解析中间件
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended:true}))
 
 app.use((req,res,next)=>{
     let log = req.method+req.url+'===>'+Date.now()
